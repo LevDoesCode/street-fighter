@@ -17,7 +17,6 @@ export function createFighterPreview(fighter, position) {
     // Stats
     for (const detail in fighter) {
       if (detail !== 'name' && detail !== '_id' && detail !== 'source') {
-        console.log(detail, fighter[detail]);
         let statRow = createElement({ tagName: 'div', className: 'fighter-preview___stat-row' });
         let statRowHead = createElement({ tagName: 'div', className: 'fighter-preview___stat-row-head' });
         statRowHead.innerHTML = `${detail}`;
