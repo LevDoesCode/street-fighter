@@ -7,8 +7,28 @@ export function createFighterPreview(fighter, position) {
     className: `fighter-preview___root ${positionClassName}`,
   });
 
-  // todo: show fighter info (image, name, health, etc.)
-
+  if (fighter != undefined) {
+    // Image
+    fighterElement.appendChild(createFighterImage(fighter));
+    // Name
+    let nameElement = createElement({tagName: 'p', className:'fighter-preview___name'})
+    nameElement.innerHTML = fighter.name;
+    fighterElement.appendChild(nameElement);
+    // Stats
+    for (const detail in fighter) {
+      if (detail !== 'name' && detail !== '_id' && detail !== 'source') {
+        console.log(detail, fighter[detail]);
+        let statRow = createElement({tagName: 'div', className: 'fighter-preview___stat-row'});
+        let statRowHead = createElement({tagName: 'div', className: 'fighter-preview___stat-row-head'});
+        statRowHead.innerHTML = `${detail}`;
+        let statRowValue = createElement({tagName: 'div', className: 'fighter-preview___stat-row-value'});
+        statRowValue.innerHTML = `${fighter[detail]}`;
+        statRow.appendChild(statRowHead);
+        statRow.appendChild(statRowValue);
+        fighterElement.appendChild(statRow);
+      }
+    }
+  }
   return fighterElement;
 }
 
