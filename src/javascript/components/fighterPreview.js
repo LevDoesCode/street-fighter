@@ -12,7 +12,7 @@ export function createFighterPreview(fighter, position) {
     fighterElement.appendChild(createFighterImage(fighter));
     // Name
     let nameElement = createElement({tagName: 'p', className:'fighter-preview___name'})
-    nameElement.innerHTML = fighter.name;
+    nameElement.innerHTML = fighter.name.toUpperCase();
     fighterElement.appendChild(nameElement);
     // Stats
     for (const detail in fighter) {
