@@ -3,7 +3,6 @@ import { renderArena } from './arena';
 import versusImg from '../../../resources/versus.png';
 import { createFighterPreview } from './fighterPreview';
 import { fighterService } from '../services/fightersService';
-import App from "../app";
 
 export function createFightersSelector() {
   let selectedFighters = [];
@@ -64,6 +63,4 @@ function createVersusBlock(selectedFighters) {
 
 function startFight(selectedFighters) {
   renderArena(selectedFighters);
-  root.innerHTML = '';
-  App.startApp();
 }
