@@ -1,3 +1,15 @@
+/* Font by https://fonts.google.com/specimen/Press+Start+2P */
+@font-face {
+  font-family: PressStart2P;
+  src: url(../../resources/PressStart2P-Regular.ttf);
+}
+
+/* Font from https://hyperpix.net/fonts/street-fighter-font/ */
+@font-face {
+  font-family: StreetFighterAlt;
+  src: url(../../resources/Act_Of_Rejection.ttf);
+}
+
 .modal-layer {
   position: absolute;
   top: 0;
@@ -7,34 +19,59 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: PressStart2P;
   background-color: rgba(128, 128, 128, 0.6);
 }
 
 .modal-root {
   display: flex;
   flex-direction: column;
+  align-items: center;
   border: 1px solid rgba(0, 0, 0, .2);
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .modal-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   min-width: 300px;
   padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
+  /* border-bottom: 1px solid #e9ecef; */
   font-weight: 700;
   font-size: 22px;
+  position: relative;
+}
+
+.modal-header>span {
+  font-size: 8rem;
+  background: #FF0000;
+  background: -webkit-linear-gradient(to bottom right, #FF0000 0%, #ffc400 50%, #FF0000 100%);
+  background: -moz-linear-gradient(to bottom right, #FF0000 0%, #ffc400 50%, #FF0000 100%);
+  background: linear-gradient(to bottom right, #FF0000 0%, #ffc400 50%, #FF0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .modal-body {
   padding: 1rem;
+  font-size: 12rem;
+  font-family: StreetFighterAlt;
+  background: #E50400;
+  background: -webkit-linear-gradient(to bottom, #E50400 33%, #770103 50%, #E50400 66%);
+  background: -moz-linear-gradient(to bottom, #E50400 33%, #770103 50%, #E50400 66%);
+  background: linear-gradient(to bottom, #E50400 33%, #770103 50%, #E50400 66%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .close-btn {
-  font-size: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
+  padding: 0.2rem;
 }
