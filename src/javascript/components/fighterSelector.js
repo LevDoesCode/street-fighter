@@ -3,6 +3,7 @@ import { renderArena } from './arena';
 import versusImg from '../../../resources/versus.png';
 import { createFighterPreview } from './fighterPreview';
 import { fighterService } from '../services/fightersService';
+import App from "../app";
 
 export function createFightersSelector() {
   let selectedFighters = [];
@@ -22,7 +23,7 @@ const fighterDetailsMap = new Map();
 
 export async function getFighterInfo(fighterId) {
   // Get fighter details from local cache (fighterDetailsMap) or from the service and cache it
-  if(!fighterDetailsMap.has(fighterId)) {
+  if (!fighterDetailsMap.has(fighterId)) {
     fighterDetailsMap.set(fighterId, await fighterService.getFighterDetails(fighterId));
   }
   return fighterDetailsMap.get(fighterId);
@@ -63,4 +64,6 @@ function createVersusBlock(selectedFighters) {
 
 function startFight(selectedFighters) {
   renderArena(selectedFighters);
+  root.innerHTML = '';
+  App.startApp();
 }
