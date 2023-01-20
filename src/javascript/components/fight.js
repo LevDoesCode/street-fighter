@@ -5,14 +5,55 @@ export async function fight(firstFighter, secondFighter) {
   let fighter2 = { ...secondFighter };
   fighter1['isblocking'] = false;
   fighter2['isblocking'] = false;
+  const myThis = this;
 
   return new Promise((resolve) => {
-    document.addEventListener('keyup' , () => {resolve(autoFight(fighter1, fighter2, 1))});
+    document.addEventListener('keydown', (event) => {
+      if (event.code == controls.PlayerOneAttack) { // Fighter1 tries to attack
+        // Check if he can attack, not blocking
+        if (!fighter1.isblocking) {
+          attackFighter(fighter1, fighter2);
+        }
+      }
+      else if (event.code == controls.PlayerOneBlock) {
+        fighter1.isblocking = true;
+      }
+      else if (event.code == controls.PlayerTwoAttack) {
+        if (!fighter2.isblocking) {
+          attackFighter(fighter2, fighter1);
+        }
+      }
+      else if (event.code == controls.PlayerTwoBlock) {
+        fighter2.isblocking = true;
+      }
+      console.log("Fighter 1 HP: ", fighter1.health, " Fighter 2 HP: ", fighter2.health);
+      // Check if either fighter has 0 o less HP
+      if (fighter1.health <= 0) {
+        resolve(fighter2);
+      }
+      if (fighter2.health <= 0) {
+        resolve(fighter1);
+      }
+    });
+
+    // Key up events that release block and special attacks
+    document.addEventListener('keyup', (event) => {
+      if (event.code == controls.PlayerOneBlock) { // player 1 released the block key
+        fighter1.isblocking = false;
+      }
+      else if (event.code == controls.PlayerTwoBlock) { // player 2 released the block key
+        fighter2.isblocking = false;
+      }
+    })
   });
 }
 
 export function getDamage(attacker, defender) {
-  return Math.max(0, getHitPower(attacker) - getBlockPower(defender));
+  let blockPower = 0;
+  if (defender.isblocking) {
+    blockPower = getBlockPower(defender)
+  }
+  return Math.max(0, getHitPower(attacker) - blockPower);
 }
 
 export function getHitPower(fighter) {
@@ -31,9 +72,9 @@ function randIntegerRange(min, max) {
 }
 
 // Function to reduce the health from a player
-function getHit(player1, player2) {
-  let damage = getDamage(player2, player1);
-  player1.health -= damage;
+function attackFighter(playerA, playerB) {
+  let damage = getDamage(playerA, playerB);
+  playerB.health -= damage;
 }
 
 function autoFight(player1, player2, scale) {
@@ -42,9 +83,9 @@ function autoFight(player1, player2, scale) {
   while(player1.health > 0 && player2.health > 0) {
     let rand = randIntegerRange(0, 1);
     if (rand === 0) {
-      getHit(player1, player2)
+      attackFighter(player1, player2)
     } else {
-      getHit(player2, player1)
+      attackFighter(player2, player1)
     }
   }
   return player1.health <= 0 ? player2 : player1;
