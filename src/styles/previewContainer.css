@@ -1,3 +1,9 @@
+/* Font from https://hyperpix.net/fonts/street-fighter-font/ */
+@font-face {
+  font-family: StreetFighterAlt;
+  src: url(../../resources/Act_Of_Rejection.ttf);
+}
+
 .preview-container___root {
   flex: 1;
   display: flex;
@@ -22,13 +28,21 @@
   padding: 8px 35px;
   justify-self: right;
   text-align: center;
-  background: #ba0303;
+  background: rgba(0, 0, 0, 0);
   margin: 40px 0;
   color: #f8f9f4;
-  font-size: 22px;
+  font-size: 82px;
   cursor: pointer;
   font-weight: bold;
-  box-shadow: 6px 6px 7px 0px rgba(0, 0, 0, 0.75);
+  /* box-shadow: 6px 6px 7px 0px rgba(0, 0, 0, 0.75); */
+  border-style: none;
+  font-family: StreetFighterAlt;
+  text-shadow:
+  3px 3px 0 #ba0303,
+  -1px -1px 0 #ba0303,
+  1px -1px 0 #ba0303,
+  -1px 1px 0 #ba0303,
+  1px 1px 0 #ba0303;
 }
 
 .preview-container___fight-btn.disabled {
